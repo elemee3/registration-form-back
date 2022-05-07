@@ -38,6 +38,6 @@ class PetController extends Controller
 
         return response()->json([
           'message' => $message
-        ], 201);
+        ], $statusCode);
     }
 }

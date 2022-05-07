@@ -5,7 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pet extends Model
 {
     /**
-     * This assignment is in preparation for a future database connection.
+     * NOTE: $fillable is not currently in use, here in preparation for a future
+     * database connection
      *
      * The attributes that are mass assignable.
      *
