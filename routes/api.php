@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+/* Using resource to allow easy access to other methods on this controller in the future */
+Route::resource('pets', 'App\Http\Controllers\PetController', ['only' => ['store']]);
