@@ -1,6 +1,6 @@
 ## About
 
-The Pet Owner Registration page is a simple form that collects data, and sends it to this back end application. Here the data is ingested and either saved or validated based on database connection status. A 201 Created response is returned to the front end upon successful save or validation, otherwise a 400 Bad Request response is returned.
+The Pet Owner Registration page is a simple form that collects data, and sends it to this back end application. Here the data is ingested by a Laravel application and either saved or validated based on database connection status. A 201 Created response is returned to the front end upon successful save or validation, otherwise a 400 Bad Request response is returned.
 
 This repo is intended to be used in conjunction with the front end application, [registration-form](https://github.com/elemee3/registration-form).
 
