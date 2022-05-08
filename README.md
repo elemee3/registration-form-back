@@ -1,64 +1,36 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## About
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The Pet Owner Registration page is a simple form that collects data, and sends it to this back end application. Here the data is ingested and either saved or validated based on database connection status. A 201 Created response is returned to the front end upon successful save or validation, otherwise a 400 Bad Request response is returned.
 
-## About Laravel
+This repo is intended to be used in conjunction with the front end application, [registration-form](https://github.com/elemee3/registration-form).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project requires the following:
+  - PHP 7
+    - Proper installation may require the following extensions:
+    - php7.0-mbstring
+    - php7.2-xml
+  - Laravel 8
+  - Composer
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project was developed on Ubuntu 20.04. Instructions will support Linux/Unix/MacOS environments. Windows support is not guaranteed at this time.
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Ensure proper installation of all required software listed above
+2. Clone this repository via HTTPS
+3. `cd` into the repository in the terminal
+4. Run `composer install`
+5. Run `php artisan serve`
+6. See that the development server has started
+7. The back end is now ready to receive requests from the front end application
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Decisions & Considerations
 
-## Laravel Sponsors
+Due to the nature of this project including time constraints and unknown future states of the app, there were multiple opportunities to make design and architectural decisions. In addition there are of course many options for improving this app.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### Design & Architectural Decisions
+- While this is a generic app for pets, right now it specifically supports two animal types: cat and dog. While for the simplified purpose of this activity, using a Pet class to encompass both makes sense, a future state would likely require more complex design. To make this more scalable and adaptable, I would create an abstract Pet class, then derive the Dog, Cat, and any other animal classes from there. Depending on the extent of how many pet types will be supported, and how different they are from another I could see even another layer of hierarchy coming into play. For example, Mammal class might implement the Pet class, and Cat might extend from Mammal.
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- During development of this back end, the lack of a database layer was on my mind. This would be a clear next step, to track the pets being registered through the system. While I did not want to focus unnecessary time on setting up a database for the current state, I did give thought to supporting that transition in the future. This planning can be found in the routes, by using the resource method rather than a POST, allowing for an easier addition of API methods, such as viewing all pets, or one in particular. The store method in the controller is already set up to create a new record in the (future) pets table; a simple true/false toggle in the .env file controls the app's behavior to accommodate use either with or without the database connection.
